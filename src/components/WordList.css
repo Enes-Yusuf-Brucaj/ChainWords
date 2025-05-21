@@ -1,0 +1,33 @@
+.word-chain {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.word {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.letter-box {
+  width: 40px;
+  height: 40px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease;
+  background-color: #ccc;
+}
+
+.shared-letter {
+  border: 2px solid white;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

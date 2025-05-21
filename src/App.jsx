@@ -108,14 +108,6 @@ function App() {
 
   return (
     <div className="app">
-      <header>
-        <h1>ChainWords</h1>
-        <p>
-          Connect words where each starts with the last letter of the previous
-          word!
-        </p>
-      </header>
-
       <div className="game-info">
         <div className="timer">
           <span>Time:</span>
@@ -127,6 +119,7 @@ function App() {
           </div>
           <span>{formatTime(timeLeft)}</span>
         </div>
+        <h1 className="title">ChainWords</h1>
         <div className="score">
           <span>Score:</span>
           <span id="score-value">{score}</span>

@@ -1,64 +1,56 @@
-type WordListProps = {
+import React from "react";
+import "./WordList.css";
+
+const COLORS = ["#6C5CE7", "#00B894", "#E17055", "#0984E3", "#D63031"];
+
+const WordList = ({
+  words,
+  currentIndex,
+}: {
   words: string[];
   currentIndex: number;
-};
-
-type LetterData = {
-  letter: string;
-  wordIndex: number;
-  isShared: boolean;
-  isCurrent: boolean;
-};
-
-const WordList: React.FC<WordListProps> = ({ words, currentIndex }) => {
-  // Build flat list of letters, removing duplicate shared letters
-  const letterChain: LetterData[] = [];
-
-  words.forEach((word, i) => {
-    const isLastWord = i === words.length - 1;
-    const nextWord = words[i + 1];
-
-    for (let j = 0; j < word.length; j++) {
-      const isSharedLetter =
-        i < words.length - 1 &&
-        j === word.length - 1 &&
-        word[word.length - 1] === nextWord?.[0];
-
-      // Only push if it's not a shared letter (to be handled in next word)
-      if (!isSharedLetter || i === currentIndex) {
-        letterChain.push({
-          letter: word[j],
-          wordIndex: i,
-          isShared: isSharedLetter,
-          isCurrent: i === currentIndex,
-        });
-      }
-    }
-  });
-
-  // Center on the first letter of the current word (or shared letter)
-  const centerIndex = letterChain.findIndex(
-    (l) => l.wordIndex === currentIndex && !l.isShared
-  );
-
-  const offsetStyle = {
-    transform: `translateX(calc(50% - ${centerIndex * 1}ch))`,
-  };
-
+}) => {
   return (
     <div className="word-chain">
-      <div className="letter-row" style={offsetStyle}>
-        {letterChain.map((l, i) => (
-          <span
-            key={`${l.letter}-${i}`}
-            className={`letter-card word-${l.wordIndex} ${
-              l.isCurrent ? "active" : ""
-            }`}
-          >
-            {l.letter.toUpperCase()}
-          </span>
-        ))}
-      </div>
+      {words.map((word, wordIndex) => {
+        const color = COLORS[wordIndex % COLORS.length];
+        const nextColor = COLORS[(wordIndex + 1) % COLORS.length];
+        const isLastWord = wordIndex === words.length - 1;
+
+        // Skip first letter if it's shared with the previous word
+        const lettersToRender =
+          wordIndex === 0 ? word.split("") : word.slice(1).split("");
+
+        return (
+          <div className="word" key={wordIndex}>
+            {lettersToRender.map((letter, letterIndex) => {
+              // Adjust actual index in full word
+              const actualIndex =
+                wordIndex === 0 ? letterIndex : letterIndex + 1;
+
+              const isShared = !isLastWord && actualIndex === word.length - 1;
+
+              return (
+                <div
+                  key={actualIndex}
+                  className={`letter-box ${isShared ? "shared-letter" : ""}`}
+                  style={
+                    isShared
+                      ? {
+                          background: `linear-gradient(to right, ${color} 50%, ${nextColor} 50%)`,
+                        }
+                      : { backgroundColor: color }
+                  }
+                >
+                  {letter.toUpperCase()}
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 };
+
+export default WordList;

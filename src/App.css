@@ -31,24 +31,11 @@ body {
   min-height: 100vh;
 }
 
-header {
-  background-color: var(--primary-color);
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-h1 {
-  font-size: 2.5rem;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
-}
-
 .game-info {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .timer,
@@ -80,6 +67,14 @@ h1 {
   transition: width 1s linear;
 }
 
+.title {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: var(--accent-color);
+}
+
 .score {
   color: var(--accent-color);
 }
@@ -97,6 +92,7 @@ h1 {
 
 .word-chain {
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
   overflow: hidden;
@@ -108,12 +104,12 @@ h1 {
 .word-container {
   display: flex;
   transition: transform 0.5s ease;
-  transform: translateX(-40%);
+  transform: translateX(0);
 }
 
 .word {
   display: flex;
-  margin: 0 15px;
+  margin: 0;
   transition: all 0.3s ease;
 }
 
@@ -123,25 +119,33 @@ h1 {
 
 .word.past {
   opacity: 0.5;
-  transform: scale(0.8) translateX(-20px);
+  transform: scale(0.8);
 }
 
 .letter {
   font-size: 2.5rem;
   font-weight: bold;
-  padding: 10px;
-  margin: 2px;
-  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 0 1px;
+  border-radius: 10px;
   background-color: var(--primary-color);
   color: var(--text-color);
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
   text-transform: uppercase;
   position: relative;
+  min-width: 40px;
+  text-align: center;
+  user-select: none;
 }
 
 .letter.highlight {
   background-color: var(--accent-color);
   transform: scale(1.1);
+  z-index: 2;
+}
+
+.letter.overlap {
+  margin-left: -10px; /* Adjust this value as needed for overlap */
 }
 
 .input-container {
@@ -265,80 +269,46 @@ h1 {
 @keyframes modalFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: scale(0.8);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
 
 .modal h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: var(--accent-color);
 }
 
 .modal p {
-  margin-bottom: 1.5rem;
   font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
-.modal .final-score {
-  font-size: 2.5rem;
-  color: var(--success-color);
-  margin: 1rem 0;
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.play-again-btn {
+.modal button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
   background-color: var(--accent-color);
   color: var(--bg-color);
-  border: none;
-  border-radius: 5px;
-  padding: 0.8rem 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-.play-again-btn:hover {
-  background-color: var(--success-color);
-  transform: scale(1.05);
+.modal button:hover {
+  background-color: var(--primary-color);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .letter {
-    font-size: 1.8rem;
-    padding: 8px;
-  }
-
-  .word-input {
-    font-size: 1.2rem;
-  }
-
-  .timer-bar {
-    width: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .game-info {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .letter {
-    font-size: 1.5rem;
-    padding: 6px;
-  }
-
-  .word-chain {
-    height: 100px;
-  }
+.show {
+  display: flex;
 }
