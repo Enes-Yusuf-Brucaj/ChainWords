@@ -1,8 +1,8 @@
 type PointsPopupProps = {
-  points: number,
-  x: number,
-  y: number,
-  show: boolean,
+  points: number;
+  x: number;
+  y: number;
+  show: boolean;
 };
 
 const PointsPopup: React.FC<PointsPopupProps> = ({ points, x, y, show }) => {
