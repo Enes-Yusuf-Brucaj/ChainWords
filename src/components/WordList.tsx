@@ -25,7 +25,6 @@ const WordList: React.FC<WordListProps> = ({ words, currentIndex }) => {
   }, []);
 
   useEffect(() => {
-    // Auto-scroll to bottom when new words are added
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
@@ -40,12 +39,12 @@ const WordList: React.FC<WordListProps> = ({ words, currentIndex }) => {
     const rows: Array<Array<{ word: string; index: number }>> = [];
     let currentRow: Array<{ word: string; index: number }> = [];
     let currentRowWidth = 0;
-    const letterWidth = 48; // Width of each letter box (40px + gap)
-    const wordSpacing = 16; // Space between words
-    const maxRowWidth = containerWidth - 40; // Account for padding
+    const letterWidth = 48;
+    const wordSpacing = 16;
+    const maxRowWidth = containerWidth - 40;
 
     words.forEach((word, wordIndex) => {
-      // Calculate letters to render (skip first letter if shared with previous word)
+      // Calculate letters to render
       const lettersToRender = wordIndex === 0 ? word.length : word.length - 1;
       const wordWidth = lettersToRender * letterWidth + wordSpacing;
 
