@@ -77,11 +77,11 @@ function App() {
 
   const addWord = async (word) => {
     if (usedWords.includes(word)) {
-      return setMessage("⚠️ Word already used.");
+      return setMessage("Word already used.");
     }
 
     if (word[0] !== currentLetter) {
-      return setMessage(`⚠️ Word must start with '${currentLetter}'.`);
+      return setMessage(`Word must start with '${currentLetter}'.`);
     }
 
     try {
@@ -90,7 +90,7 @@ function App() {
       );
 
       if (!res.ok) {
-        return setMessage("❌ Not a valid English word.");
+        return setMessage("Not a valid English word.");
       }
 
       const points = calculatePoints(word);
@@ -99,10 +99,10 @@ function App() {
 
       setUsedWords([...usedWords, word]);
       setCurrentLetter(word.slice(-1));
-      setMessage("✅ Good one!");
+      setMessage("Good one!");
     } catch (error) {
       console.error("Error checking word:", error);
-      setMessage("⚠️ There was an error checking your word.");
+      setMessage("There was an error checking your word.");
     }
   };
 
