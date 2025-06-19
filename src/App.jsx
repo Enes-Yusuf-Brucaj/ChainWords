@@ -143,8 +143,7 @@ function App() {
           <p>{message}</p>
         </div>
       </div>
-
-      {/* Points popup */}
+      
       <PointsPopup
         points={pointsPopup.points}
         x={pointsPopup.x}
@@ -152,7 +151,6 @@ function App() {
         show={pointsPopup.show}
       />
 
-      {/* Game Over Modal */}
       <GameOverModal
         isVisible={isGameOver}
         score={score}
